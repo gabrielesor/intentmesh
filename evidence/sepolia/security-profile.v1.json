@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "PUBLIC_TESTNET_DEMO_V1",
+  "status": "DEPLOYED",
+  "approvedNetwork": {
+    "name": "Ethereum Sepolia",
+    "caip2ChainId": "eip155:11155111",
+    "numericChainId": "11155111",
+    "genesisBlockHash": "0x25a5cc106eea7138acab33231d7160d69cb777ee0c2c553fcddf5138993e6dd9",
+    "rpcUrlEnvironmentVariable": "INTENTMESH_TESTNET_RPC_URL",
+    "requireHttps": true,
+    "explorerTransactionBaseUrl": "https://sepolia.etherscan.io/tx/"
+  },
+  "contractPolicy": {
+    "origin": "SELF_DEPLOYED_PINNED_SOURCE_ONLY",
+    "allowedSourceFiles": [
+      "contracts/src/LocalToken.sol",
+      "contracts/src/LendingVault.sol",
+      "contracts/src/PositionToken.sol"
+    ],
+    "assetSymbol": "imUSDC",
+    "positionSymbol": "imPOS"
+  },
+  "transactionLimits": {
+    "allowedActions": [
+      "DEPLOY_SYNTHETIC_CONTRACT",
+      "CONFIGURE_SYNTHETIC_CONTRACT",
+      "APPROVE_SYNTHETIC_TOKEN",
+      "DEPOSIT_SYNTHETIC_TOKEN"
+    ],
+    "maximumTransactionCount": "10",
+    "maximumGasPerTransaction": "2500000",
+    "maximumFeePerGasWei": "10000000000",
+    "maximumPriorityFeePerGasWei": "2000000000",
+    "maximumCumulativeGasCostWei": "20000000000000000",
+    "maximumTokenPrincipalSmallestUnit": "10000000000",
+    "maximumNativeValueWei": "0"
+  },
+  "finality": {
+    "requiredBlockTag": "finalized",
+    "maximumWaitSeconds": "1200",
+    "pollIntervalSeconds": "12"
+  },
+  "signerBoundary": {
+    "deploymentSignerMode": "EXTERNAL_INTERACTIVE_ENCRYPTED_KEYSTORE",
+    "deploymentCredentialInput": "INTERACTIVE_PASSWORD_NO_RAW_KEY_ENV_OR_ARGUMENT",
+    "workflowSignerMode": "EXTERNAL_RESTRICTED_SIGNER",
+    "workflowCredentialInput": "INTERACTIVE_ENCRYPTED_KEYSTORE_NO_RAW_SECRET",
+    "dedicatedTestnetAccountRequired": true,
+    "llmAccess": false,
+    "a2aAccess": false,
+    "mcpAccess": false
+  },
+  "hardProhibitions": {
+    "mainnetExecution": true,
+    "nonAllowlistedChainExecution": true,
+    "existingTokenUse": true,
+    "existingProtocolUse": true,
+    "bridgeUse": true,
+    "nativeValueTransfer": true,
+    "unlimitedTokenApproval": true,
+    "mainnetAccountReuse": true,
+    "modelAccessibleSigning": true
+  }
+}

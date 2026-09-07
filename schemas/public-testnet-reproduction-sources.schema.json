@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-reproduction-sources:1.0.0",
+  "title": "IntentMesh credential-free public reproduction sources",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "chainId", "primaryRpcUrl", "independentRpcUrl", "catalogs"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "chainId": { "const": "eip155:11155111" },
+    "primaryRpcUrl": { "const": "https://sepolia.gateway.tenderly.co" },
+    "independentRpcUrl": { "const": "https://rpc.sepolia.ethpandaops.io" },
+    "catalogs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^https://github[.]com/" }
+    }
+  }
+}

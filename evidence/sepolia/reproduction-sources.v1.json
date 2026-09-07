@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "chainId": "eip155:11155111",
+  "primaryRpcUrl": "https://sepolia.gateway.tenderly.co",
+  "independentRpcUrl": "https://rpc.sepolia.ethpandaops.io",
+  "catalogs": [
+    "https://github.com/ethereum-lists/chains/blob/master/_data/chains/eip155-11155111.json",
+    "https://github.com/eth-clients/sepolia"
+  ]
+}

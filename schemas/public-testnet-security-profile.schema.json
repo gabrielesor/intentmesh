@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-security-profile:1.0.0",
+  "title": "IntentMesh public testnet security profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "status",
+    "approvedNetwork",
+    "contractPolicy",
+    "transactionLimits",
+    "finality",
+    "signerBoundary",
+    "hardProhibitions"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "profileId": { "type": "string", "const": "PUBLIC_TESTNET_DEMO_V1" },
+    "status": {
+      "type": "string",
+      "enum": ["FROZEN_NO_DEPLOYMENT", "DEPLOYMENT_AUTHORIZED", "DEPLOYED"]
+    },
+    "approvedNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "caip2ChainId",
+        "numericChainId",
+        "genesisBlockHash",
+        "rpcUrlEnvironmentVariable",
+        "requireHttps",
+        "explorerTransactionBaseUrl"
+      ],
+      "properties": {
+        "name": { "type": "string", "const": "Ethereum Sepolia" },
+        "caip2ChainId": { "type": "string", "const": "eip155:11155111" },
+        "numericChainId": { "type": "string", "const": "11155111" },
+        "genesisBlockHash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+        "rpcUrlEnvironmentVariable": {
+          "type": "string",
+          "const": "INTENTMESH_TESTNET_RPC_URL"
+        },
+        "requireHttps": { "type": "boolean", "const": true },
+        "explorerTransactionBaseUrl": {
+          "type": "string",
+          "const": "https://sepolia.etherscan.io/tx/"
+        }
+      }
+    },
+    "contractPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "allowedSourceFiles", "assetSymbol", "positionSymbol"],
+      "properties": {
+        "origin": { "type": "string", "const": "SELF_DEPLOYED_PINNED_SOURCE_ONLY" },
+        "allowedSourceFiles": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "contracts/src/LocalToken.sol",
+              "contracts/src/LendingVault.sol",
+              "contracts/src/PositionToken.sol"
+            ]
+          }
+        },
+        "assetSymbol": { "type": "string", "const": "imUSDC" },
+        "positionSymbol": { "type": "string", "const": "imPOS" }
+      }
+    },
+    "transactionLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowedActions",
+        "maximumTransactionCount",
+        "maximumGasPerTransaction",
+        "maximumFeePerGasWei",
+        "maximumPriorityFeePerGasWei",
+        "maximumCumulativeGasCostWei",
+        "maximumTokenPrincipalSmallestUnit",
+        "maximumNativeValueWei"
+      ],
+      "properties": {
+        "allowedActions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_SYNTHETIC_CONTRACT",
+              "CONFIGURE_SYNTHETIC_CONTRACT",
+              "APPROVE_SYNTHETIC_TOKEN",
+              "DEPOSIT_SYNTHETIC_TOKEN"
+            ]
+          }
+        },
+        "maximumTransactionCount": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumGasPerTransaction": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumFeePerGasWei": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumPriorityFeePerGasWei": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumCumulativeGasCostWei": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumTokenPrincipalSmallestUnit": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "maximumNativeValueWei": { "type": "string", "const": "0" }
+      }
+    },
+    "finality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredBlockTag", "maximumWaitSeconds", "pollIntervalSeconds"],
+      "properties": {
+        "requiredBlockTag": { "type": "string", "const": "finalized" },
+        "maximumWaitSeconds": { "$ref": "#/$defs/positiveDecimalInteger" },
+        "pollIntervalSeconds": { "$ref": "#/$defs/positiveDecimalInteger" }
+      }
+    },
+    "signerBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deploymentSignerMode",
+        "deploymentCredentialInput",
+        "workflowSignerMode",
+        "workflowCredentialInput",
+        "dedicatedTestnetAccountRequired",
+        "llmAccess",
+        "a2aAccess",
+        "mcpAccess"
+      ],
+      "properties": {
+        "deploymentSignerMode": {
+          "type": "string",
+          "const": "EXTERNAL_INTERACTIVE_ENCRYPTED_KEYSTORE"
+        },
+        "deploymentCredentialInput": {
+          "type": "string",
+          "const": "INTERACTIVE_PASSWORD_NO_RAW_KEY_ENV_OR_ARGUMENT"
+        },
+        "workflowSignerMode": {
+          "type": "string",
+          "const": "EXTERNAL_RESTRICTED_SIGNER"
+        },
+        "workflowCredentialInput": {
+          "type": "string",
+          "const": "INTERACTIVE_ENCRYPTED_KEYSTORE_NO_RAW_SECRET"
+        },
+        "dedicatedTestnetAccountRequired": { "type": "boolean", "const": true },
+        "llmAccess": { "type": "boolean", "const": false },
+        "a2aAccess": { "type": "boolean", "const": false },
+        "mcpAccess": { "type": "boolean", "const": false }
+      }
+    },
+    "hardProhibitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mainnetExecution",
+        "nonAllowlistedChainExecution",
+        "existingTokenUse",
+        "existingProtocolUse",
+        "bridgeUse",
+        "nativeValueTransfer",
+        "unlimitedTokenApproval",
+        "mainnetAccountReuse",
+        "modelAccessibleSigning"
+      ],
+      "properties": {
+        "mainnetExecution": { "type": "boolean", "const": true },
+        "nonAllowlistedChainExecution": { "type": "boolean", "const": true },
+        "existingTokenUse": { "type": "boolean", "const": true },
+        "existingProtocolUse": { "type": "boolean", "const": true },
+        "bridgeUse": { "type": "boolean", "const": true },
+        "nativeValueTransfer": { "type": "boolean", "const": true },
+        "unlimitedTokenApproval": { "type": "boolean", "const": true },
+        "mainnetAccountReuse": { "type": "boolean", "const": true },
+        "modelAccessibleSigning": { "type": "boolean", "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "positiveDecimalInteger": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    }
+  }
+}

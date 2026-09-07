@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "1.0.0",
+  "traceId": "intentmesh-sepolia-public-run-v1",
+  "profileId": "PUBLIC_TESTNET_DEMO_V1",
+  "publicBoundary": "CONTROLLED_ADMITTED_INTENT_TO_FINALIZED_POSTCONDITIONS",
+  "aiExecutionDisclosure": "NO_LIVE_MODEL_CALL_IN_PUBLIC_RUN",
+  "records": [
+    {
+      "eventType": "PUBLIC_SECURITY_BOUNDARY_BOUND",
+      "componentId": "public-security-gate",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": [],
+      "outputHash": "0xbb0cedd612eeab1a537163470f5377a90884e5f8908b4a83ffb6561c24cb83b7",
+      "classification": "IMPLEMENTATION DETAIL",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "SEPOLIA_SYNTHETIC_ONLY",
+      "eventId": "intentmesh-sepolia-public-run-v1:1",
+      "sequence": "1",
+      "previousEventHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x7f3badea2a26e89bc27eeb7586c23d6fdc867935d007bc90d13ff6ed88de53e5"
+    },
+    {
+      "eventType": "DEPLOYMENT_MANIFEST_BOUND",
+      "componentId": "deployment-verifier",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": ["0xbb0cedd612eeab1a537163470f5377a90884e5f8908b4a83ffb6561c24cb83b7"],
+      "outputHash": "0xf613c05a1de4b311ada7afd2b46c5a30788b430915e898cebdada8b4a9f95252",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "DEPLOYMENT_BOUND",
+      "eventId": "intentmesh-sepolia-public-run-v1:2",
+      "sequence": "2",
+      "previousEventHash": "0x7f3badea2a26e89bc27eeb7586c23d6fdc867935d007bc90d13ff6ed88de53e5",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xc61e370e659874d05da45ffc2f142c060e7a5332d9121fab00253da912b3548b"
+    },
+    {
+      "eventType": "ADMITTED_INTENT_BOUND",
+      "componentId": "intent-admission",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": [
+        "0xbb0cedd612eeab1a537163470f5377a90884e5f8908b4a83ffb6561c24cb83b7",
+        "0xf613c05a1de4b311ada7afd2b46c5a30788b430915e898cebdada8b4a9f95252"
+      ],
+      "outputHash": "0x298e436104849251c26e3484e5f0e92b2143895f1980c7cd80804bae8559e450",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "CONTROLLED_INTENT_BOUND",
+      "eventId": "intentmesh-sepolia-public-run-v1:3",
+      "sequence": "3",
+      "previousEventHash": "0xc61e370e659874d05da45ffc2f142c060e7a5332d9121fab00253da912b3548b",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xfcabd60f084d82855000481545202c8d883594c2d8327c1957ec857d9ac109c5"
+    },
+    {
+      "eventType": "EVIDENCE_BUNDLE_ASSEMBLED",
+      "componentId": "evidence-assembler",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": ["0x298e436104849251c26e3484e5f0e92b2143895f1980c7cd80804bae8559e450"],
+      "outputHash": "0x74171659e828d936119b57f3deb63bb02455396843484e47f67b0c564fe440aa",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "SYNTHETIC_EVIDENCE_VALIDATED",
+      "eventId": "intentmesh-sepolia-public-run-v1:4",
+      "sequence": "4",
+      "previousEventHash": "0xfcabd60f084d82855000481545202c8d883594c2d8327c1957ec857d9ac109c5",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x87736e25ab24f7ed712748a19c0b8ad7ce370bb03c85080ca63dac596cbe6c89"
+    },
+    {
+      "eventType": "CANDIDATE_PLAN_SET_CREATED",
+      "componentId": "plan-generator",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": [
+        "0x298e436104849251c26e3484e5f0e92b2143895f1980c7cd80804bae8559e450",
+        "0x74171659e828d936119b57f3deb63bb02455396843484e47f67b0c564fe440aa"
+      ],
+      "outputHash": "0xa276163542b3c8a3bfaa02fe81d995b8722a13fdee9ba93c888b29e92b10aad5",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "FINITE_CANDIDATES_CREATED",
+      "eventId": "intentmesh-sepolia-public-run-v1:5",
+      "sequence": "5",
+      "previousEventHash": "0x87736e25ab24f7ed712748a19c0b8ad7ce370bb03c85080ca63dac596cbe6c89",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xfb315b106c480861878e873e7a31fc95b4fe07311ffc451d083001260b10500b"
+    },
+    {
+      "eventType": "POLICY_DECISION_SET_CREATED",
+      "componentId": "policy-engine",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": [
+        "0x74171659e828d936119b57f3deb63bb02455396843484e47f67b0c564fe440aa",
+        "0xa276163542b3c8a3bfaa02fe81d995b8722a13fdee9ba93c888b29e92b10aad5"
+      ],
+      "outputHash": "0xc38b516a4fb8bb640e2a8da95ddaf4f6aa68735fb3016931f0081f3dea3e93f1",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "POLICY_EVALUATED",
+      "eventId": "intentmesh-sepolia-public-run-v1:6",
+      "sequence": "6",
+      "previousEventHash": "0xfb315b106c480861878e873e7a31fc95b4fe07311ffc451d083001260b10500b",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xa82ca702fbd256a8473bc06e944976ad9af7f1eabe9182843b50db8b1cd39b1c"
+    },
+    {
+      "eventType": "PLAN_SELECTED",
+      "componentId": "plan-selector",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": [
+        "0xa276163542b3c8a3bfaa02fe81d995b8722a13fdee9ba93c888b29e92b10aad5",
+        "0xc38b516a4fb8bb640e2a8da95ddaf4f6aa68735fb3016931f0081f3dea3e93f1"
+      ],
+      "outputHash": "0xe3d591da787c0c49513937dc0c3274d6ae2e5a515fde8b5d7d7e4569abbaafab",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "RISK_FIRST_ALPHA_SELECTED",
+      "eventId": "intentmesh-sepolia-public-run-v1:7",
+      "sequence": "7",
+      "previousEventHash": "0xa82ca702fbd256a8473bc06e944976ad9af7f1eabe9182843b50db8b1cd39b1c",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x7b0bd3b7835b2b5894ca0c9dd2571391a55fc5fa8b82fa1eae84596e70b9a53f"
+    },
+    {
+      "eventType": "SIMULATION_COMPLETED",
+      "componentId": "public-simulator",
+      "occurredAt": "2026-09-05T13:13:15.360Z",
+      "inputHashes": ["0xe3d591da787c0c49513937dc0c3274d6ae2e5a515fde8b5d7d7e4569abbaafab"],
+      "outputHash": "0x490c4ca806665b143498cc7afb22c16472dde54721ab6971f2abea6151510873",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "READ_ONLY_SIMULATION_PASS",
+      "eventId": "intentmesh-sepolia-public-run-v1:8",
+      "sequence": "8",
+      "previousEventHash": "0x7b0bd3b7835b2b5894ca0c9dd2571391a55fc5fa8b82fa1eae84596e70b9a53f",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x92ca29c70b6ca8324b847fc6b1d4c776b23e6b405706fea12dfa9449f1008b5f"
+    },
+    {
+      "eventType": "HUMAN_APPROVAL_VERIFIED",
+      "componentId": "approval-gateway",
+      "occurredAt": "2026-09-05T13:20:02.044Z",
+      "inputHashes": [
+        "0x490c4ca806665b143498cc7afb22c16472dde54721ab6971f2abea6151510873",
+        "0xc38b516a4fb8bb640e2a8da95ddaf4f6aa68735fb3016931f0081f3dea3e93f1",
+        "0xe3d591da787c0c49513937dc0c3274d6ae2e5a515fde8b5d7d7e4569abbaafab"
+      ],
+      "outputHash": "0xdaf1cd818285966ea51a16a097d9098eeb1b787499fff74afc463dd27e237c2d",
+      "classification": "STANDARD PROFILE / ADAPTER",
+      "authority": "HUMAN",
+      "decisionCode": "EIP712_APPROVAL_VERIFIED",
+      "eventId": "intentmesh-sepolia-public-run-v1:9",
+      "sequence": "9",
+      "previousEventHash": "0x92ca29c70b6ca8324b847fc6b1d4c776b23e6b405706fea12dfa9449f1008b5f",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x61ea7473b91c79f77a5fb7520364481639d0baa595feaf587ed7a22a71828bdb"
+    },
+    {
+      "eventType": "ALLOWANCE_SIGNATURE_VERIFIED",
+      "componentId": "external-restricted-signer",
+      "occurredAt": "2026-09-05T13:20:02.044Z",
+      "inputHashes": [
+        "0x892efdd1e9038d1c4ec65d743a9df29a4ec184ee516ea0e24cab9a4535bb2a16",
+        "0xdaf1cd818285966ea51a16a097d9098eeb1b787499fff74afc463dd27e237c2d"
+      ],
+      "outputHash": "0x89da4f960306d5e3f693fe5d0e99df9ef74b0e4483a892f9ca646d0bba5c305a",
+      "classification": "IMPLEMENTATION DETAIL",
+      "authority": "EXTERNAL_SIGNER",
+      "decisionCode": "EXACT_SIGNED_BYTES_VERIFIED",
+      "eventId": "intentmesh-sepolia-public-run-v1:10",
+      "sequence": "10",
+      "previousEventHash": "0x61ea7473b91c79f77a5fb7520364481639d0baa595feaf587ed7a22a71828bdb",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x4e9081b4ed171fa9423bf190a09cb0360e4e11d553054c56c1b8f6dd71f519c2"
+    },
+    {
+      "eventType": "ALLOWANCE_CONFIRMED",
+      "componentId": "public-executor",
+      "occurredAt": "2026-09-05T13:22:06.095Z",
+      "inputHashes": [
+        "0x89da4f960306d5e3f693fe5d0e99df9ef74b0e4483a892f9ca646d0bba5c305a",
+        "0xdaf1cd818285966ea51a16a097d9098eeb1b787499fff74afc463dd27e237c2d"
+      ],
+      "outputHash": "0x5d4cce3d07ff553ae702d2bb953e9e97b90f33eaa33447e4094686b658e419e4",
+      "classification": "STANDARD PROFILE / ADAPTER",
+      "authority": "CHAIN",
+      "decisionCode": "EXACT_ALLOWANCE_CONFIRMED",
+      "eventId": "intentmesh-sepolia-public-run-v1:11",
+      "sequence": "11",
+      "previousEventHash": "0x4e9081b4ed171fa9423bf190a09cb0360e4e11d553054c56c1b8f6dd71f519c2",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xd2442b37c5d0c6327ab73daa342123b5dbd59fa7f68c336339b26e5045ee242f"
+    },
+    {
+      "eventType": "DEPOSIT_SIGNATURE_VERIFIED",
+      "componentId": "external-restricted-signer",
+      "occurredAt": "2026-09-05T13:23:25.511Z",
+      "inputHashes": [
+        "0x5d4cce3d07ff553ae702d2bb953e9e97b90f33eaa33447e4094686b658e419e4",
+        "0x8e991417ce4218defab371a2544513db1983f72ea80805f879a06017f8e592b1",
+        "0xdaf1cd818285966ea51a16a097d9098eeb1b787499fff74afc463dd27e237c2d"
+      ],
+      "outputHash": "0x171f90cdeaf2391cae2ca82727035d1e09eab2ac55f76f7bdc488064b55fdb2c",
+      "classification": "IMPLEMENTATION DETAIL",
+      "authority": "EXTERNAL_SIGNER",
+      "decisionCode": "EXACT_SIGNED_BYTES_VERIFIED",
+      "eventId": "intentmesh-sepolia-public-run-v1:12",
+      "sequence": "12",
+      "previousEventHash": "0xd2442b37c5d0c6327ab73daa342123b5dbd59fa7f68c336339b26e5045ee242f",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xa38940c867ac50ca658c02b4e9bdc77dee460746a36fd119cd4b80729b0d2dda"
+    },
+    {
+      "eventType": "DEPOSIT_CONFIRMED",
+      "componentId": "public-executor",
+      "occurredAt": "2026-09-05T13:23:25.511Z",
+      "inputHashes": [
+        "0x171f90cdeaf2391cae2ca82727035d1e09eab2ac55f76f7bdc488064b55fdb2c",
+        "0x5d4cce3d07ff553ae702d2bb953e9e97b90f33eaa33447e4094686b658e419e4"
+      ],
+      "outputHash": "0x4d045ba3594da740b7533e9ce9d4240f93da591184ad66980f8b43b8eb978085",
+      "classification": "STANDARD PROFILE / ADAPTER",
+      "authority": "CHAIN",
+      "decisionCode": "EXACT_DEPOSIT_CONFIRMED",
+      "eventId": "intentmesh-sepolia-public-run-v1:13",
+      "sequence": "13",
+      "previousEventHash": "0xa38940c867ac50ca658c02b4e9bdc77dee460746a36fd119cd4b80729b0d2dda",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0x2f21dc2f29ada391e3f3fdef1dc604ac66d2b95bc07f426605a414477ee1cc79"
+    },
+    {
+      "eventType": "FINALIZED_POSTCONDITIONS_VERIFIED",
+      "componentId": "finality-verifier",
+      "occurredAt": "2026-09-05T13:53:35.608Z",
+      "inputHashes": [
+        "0x4d045ba3594da740b7533e9ce9d4240f93da591184ad66980f8b43b8eb978085",
+        "0xf613c05a1de4b311ada7afd2b46c5a30788b430915e898cebdada8b4a9f95252"
+      ],
+      "outputHash": "0xe0a43b7817969f5ebc617bbe7e98c355d7903c698f498b8df0678222954f6e10",
+      "classification": "PROJECT-SPECIFIC SCHEMA",
+      "authority": "DETERMINISTIC",
+      "decisionCode": "DUAL_SOURCE_FINALIZED_PASS",
+      "eventId": "intentmesh-sepolia-public-run-v1:14",
+      "sequence": "14",
+      "previousEventHash": "0x2f21dc2f29ada391e3f3fdef1dc604ac66d2b95bc07f426605a414477ee1cc79",
+      "redactionSummary": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES",
+      "eventHash": "0xde5f2379339667c12fec091bc814d491a27587f022dd2eee2753079ef8ec3b0d"
+    }
+  ],
+  "terminalEventHash": "0xde5f2379339667c12fec091bc814d491a27587f022dd2eee2753079ef8ec3b0d",
+  "complete": true,
+  "traceHash": "0x4d76440f99051d590819052c903312e825a0504abd8d4e17b93bda3689374475"
+}

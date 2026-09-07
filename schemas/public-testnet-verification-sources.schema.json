@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-verification-sources:1.0.0",
+  "title": "IntentMesh public-testnet verification sources",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileId", "primarySource", "independentSource"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "profileId": { "const": "PUBLIC_TESTNET_VERIFICATION_V1" },
+    "primarySource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "sourceType", "urlEnvironmentVariable", "endpointDisclosure"],
+      "properties": {
+        "sourceId": { "const": "configured-primary-rpc" },
+        "sourceType": { "const": "CONFIGURED_RUNTIME_RPC" },
+        "urlEnvironmentVariable": { "const": "INTENTMESH_TESTNET_RPC_URL" },
+        "endpointDisclosure": { "const": "REDACTED_RUNTIME" }
+      }
+    },
+    "independentSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "sourceType", "rpcUrl", "operator", "catalogUrl"],
+      "properties": {
+        "sourceId": { "const": "ethpandaops-public-rpc" },
+        "sourceType": { "const": "INDEPENDENT_PUBLIC_RPC" },
+        "rpcUrl": { "const": "https://rpc.sepolia.ethpandaops.io" },
+        "operator": { "const": "ethPandaOps" },
+        "catalogUrl": { "const": "https://github.com/eth-clients/sepolia" }
+      }
+    }
+  }
+}

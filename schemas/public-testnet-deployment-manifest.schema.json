@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-deployment-manifest:1.0.0",
+  "title": "IntentMesh Sepolia deployment manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "deploymentId",
+    "profileId",
+    "status",
+    "chain",
+    "buildEvidenceHash",
+    "deployer",
+    "startingNonce",
+    "transactions",
+    "contracts",
+    "configuration",
+    "totalWorstCaseGasCostWei",
+    "manifestHash"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "deploymentId": { "type": "string", "const": "INTENTMESH_SEPOLIA_SYNTHETIC_V1" },
+    "profileId": { "type": "string", "const": "PUBLIC_TESTNET_DEMO_V1" },
+    "status": { "type": "string", "const": "CONFIRMED_NOT_FINALIZED" },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chainId", "genesisBlockHash"],
+      "properties": {
+        "chainId": { "type": "string", "const": "eip155:11155111" },
+        "genesisBlockHash": {
+          "type": "string",
+          "const": "0x25a5cc106eea7138acab33231d7160d69cb777ee0c2c553fcddf5138993e6dd9"
+        }
+      }
+    },
+    "buildEvidenceHash": { "$ref": "#/$defs/hash" },
+    "deployer": { "$ref": "#/$defs/account" },
+    "startingNonce": { "type": "string", "const": "0" },
+    "transactions": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence",
+          "purpose",
+          "transactionHash",
+          "nonce",
+          "from",
+          "to",
+          "createdContract",
+          "inputHash",
+          "nativeValueWei",
+          "gasLimit",
+          "maxFeePerGasWei",
+          "gasUsed",
+          "effectiveGasPriceWei",
+          "actualGasCostWei",
+          "blockNumber",
+          "blockHash",
+          "status",
+          "explorerUrl"
+        ],
+        "properties": {
+          "sequence": { "type": "integer", "minimum": 1, "maximum": 8 },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_LOCAL_TOKEN",
+              "DEPLOY_ALPHA_VAULT",
+              "DEPLOY_BETA_VAULT",
+              "DEPLOY_POSITION_TOKEN",
+              "CONFIGURE_ALPHA_POSITION_TOKEN",
+              "CONFIGURE_BETA_POSITION_TOKEN",
+              "AUTHORIZE_ALPHA_VAULT",
+              "AUTHORIZE_BETA_VAULT"
+            ]
+          },
+          "transactionHash": { "$ref": "#/$defs/hash" },
+          "nonce": { "$ref": "#/$defs/decimal" },
+          "from": { "$ref": "#/$defs/account" },
+          "to": { "oneOf": [{ "$ref": "#/$defs/account" }, { "type": "null" }] },
+          "createdContract": {
+            "oneOf": [{ "$ref": "#/$defs/account" }, { "type": "null" }]
+          },
+          "inputHash": { "$ref": "#/$defs/hash" },
+          "nativeValueWei": { "type": "string", "const": "0" },
+          "gasLimit": { "$ref": "#/$defs/decimal" },
+          "maxFeePerGasWei": { "$ref": "#/$defs/decimal" },
+          "gasUsed": { "$ref": "#/$defs/decimal" },
+          "effectiveGasPriceWei": { "$ref": "#/$defs/decimal" },
+          "actualGasCostWei": { "$ref": "#/$defs/decimal" },
+          "blockNumber": { "$ref": "#/$defs/decimal" },
+          "blockHash": { "$ref": "#/$defs/hash" },
+          "status": { "type": "string", "const": "SUCCESS" },
+          "explorerUrl": {
+            "type": "string",
+            "pattern": "^https://sepolia[.]etherscan[.]io/tx/0x[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["token", "alpha", "beta", "position"],
+      "properties": {
+        "token": { "$ref": "#/$defs/deployedContract" },
+        "alpha": { "$ref": "#/$defs/deployedContract" },
+        "beta": { "$ref": "#/$defs/deployedContract" },
+        "position": { "$ref": "#/$defs/deployedContract" }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alphaPositionToken", "betaPositionToken", "alphaAuthorized", "betaAuthorized"],
+      "properties": {
+        "alphaPositionToken": { "$ref": "#/$defs/account" },
+        "betaPositionToken": { "$ref": "#/$defs/account" },
+        "alphaAuthorized": { "type": "boolean", "const": true },
+        "betaAuthorized": { "type": "boolean", "const": true }
+      }
+    },
+    "totalWorstCaseGasCostWei": { "$ref": "#/$defs/decimal" },
+    "manifestHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "account": { "type": "string", "pattern": "^eip155:11155111:0x[a-f0-9]{40}$" },
+    "deployedContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "address",
+        "deploymentTransactionHash",
+        "runtimeBytecodeKeccak256",
+        "artifactRuntimeMatch"
+      ],
+      "properties": {
+        "address": { "$ref": "#/$defs/account" },
+        "deploymentTransactionHash": { "$ref": "#/$defs/hash" },
+        "runtimeBytecodeKeccak256": { "$ref": "#/$defs/hash" },
+        "artifactRuntimeMatch": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

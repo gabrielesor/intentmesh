@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "PUBLIC_TESTNET_VERIFICATION_V1",
+  "primarySource": {
+    "sourceId": "configured-primary-rpc",
+    "sourceType": "CONFIGURED_RUNTIME_RPC",
+    "urlEnvironmentVariable": "INTENTMESH_TESTNET_RPC_URL",
+    "endpointDisclosure": "REDACTED_RUNTIME"
+  },
+  "independentSource": {
+    "sourceId": "ethpandaops-public-rpc",
+    "sourceType": "INDEPENDENT_PUBLIC_RPC",
+    "rpcUrl": "https://rpc.sepolia.ethpandaops.io",
+    "operator": "ethPandaOps",
+    "catalogUrl": "https://github.com/eth-clients/sepolia"
+  }
+}

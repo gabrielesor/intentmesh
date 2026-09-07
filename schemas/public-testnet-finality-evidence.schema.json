@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-finality-evidence:1.0.0",
+  "title": "IntentMesh Sepolia finalized verification evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceId",
+    "profileId",
+    "status",
+    "verifiedAt",
+    "chain",
+    "deploymentManifestHash",
+    "workflowBindings",
+    "sources",
+    "commonFinalizedBlock",
+    "transactions",
+    "contracts",
+    "stateChecks",
+    "evidenceHash"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evidenceId": { "const": "INTENTMESH_STEP15_SEPOLIA_FINALITY_V1" },
+    "profileId": { "const": "PUBLIC_TESTNET_DEMO_V1" },
+    "status": { "const": "FINALIZED_VERIFIED" },
+    "verifiedAt": { "type": "string", "format": "date-time" },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chainId", "numericChainId", "genesisBlockHash"],
+      "properties": {
+        "chainId": { "const": "eip155:11155111" },
+        "numericChainId": { "const": "11155111" },
+        "genesisBlockHash": {
+          "const": "0x25a5cc106eea7138acab33231d7160d69cb777ee0c2c553fcddf5138993e6dd9"
+        }
+      }
+    },
+    "deploymentManifestHash": { "$ref": "#/$defs/hash" },
+    "workflowBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preparationHash",
+        "intentHash",
+        "selectedPlanHash",
+        "simulationHash",
+        "policyBundleHash",
+        "approvalEnvelopeHash",
+        "allowanceEvidenceHash",
+        "depositEvidenceHash"
+      ],
+      "properties": {
+        "preparationHash": { "$ref": "#/$defs/hash" },
+        "intentHash": { "$ref": "#/$defs/hash" },
+        "selectedPlanHash": { "$ref": "#/$defs/hash" },
+        "simulationHash": { "$ref": "#/$defs/hash" },
+        "policyBundleHash": { "$ref": "#/$defs/hash" },
+        "approvalEnvelopeHash": { "$ref": "#/$defs/hash" },
+        "allowanceEvidenceHash": { "$ref": "#/$defs/hash" },
+        "depositEvidenceHash": { "$ref": "#/$defs/hash" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "sourceType", "endpointDisclosure", "observedFinalizedHead"],
+        "properties": {
+          "sourceId": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "sourceType": {
+            "type": "string",
+            "enum": ["CONFIGURED_RUNTIME_RPC", "INDEPENDENT_PUBLIC_RPC"]
+          },
+          "endpointDisclosure": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "observedFinalizedHead": { "$ref": "#/$defs/block" }
+        }
+      }
+    },
+    "commonFinalizedBlock": { "$ref": "#/$defs/block" },
+    "transactions": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence",
+          "purpose",
+          "transactionHash",
+          "nonce",
+          "from",
+          "to",
+          "createdContract",
+          "inputHash",
+          "nativeValueWei",
+          "blockNumber",
+          "blockHash",
+          "gasUsed",
+          "effectiveGasPriceWei",
+          "logsHash",
+          "status",
+          "sourceAgreement"
+        ],
+        "properties": {
+          "sequence": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "purpose": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "transactionHash": { "$ref": "#/$defs/hash" },
+          "nonce": { "$ref": "#/$defs/decimal" },
+          "from": { "$ref": "#/$defs/account" },
+          "to": { "oneOf": [{ "$ref": "#/$defs/account" }, { "type": "null" }] },
+          "createdContract": {
+            "oneOf": [{ "$ref": "#/$defs/account" }, { "type": "null" }]
+          },
+          "inputHash": { "$ref": "#/$defs/hash" },
+          "nativeValueWei": { "const": "0" },
+          "blockNumber": { "$ref": "#/$defs/decimal" },
+          "blockHash": { "$ref": "#/$defs/hash" },
+          "gasUsed": { "$ref": "#/$defs/decimal" },
+          "effectiveGasPriceWei": { "$ref": "#/$defs/decimal" },
+          "logsHash": { "$ref": "#/$defs/hash" },
+          "status": { "const": "SUCCESS" },
+          "sourceAgreement": { "const": true }
+        }
+      }
+    },
+    "contracts": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contractId",
+          "address",
+          "runtimeBytecodeKeccak256",
+          "sourceAgreement",
+          "manifestMatch"
+        ],
+        "properties": {
+          "contractId": { "type": "string", "enum": ["alpha", "beta", "position", "token"] },
+          "address": { "$ref": "#/$defs/account" },
+          "runtimeBytecodeKeccak256": { "$ref": "#/$defs/hash" },
+          "sourceAgreement": { "const": true },
+          "manifestMatch": { "const": true }
+        }
+      }
+    },
+    "stateChecks": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkId", "primary", "independent", "expected", "passed"],
+        "properties": {
+          "checkId": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" },
+          "primary": { "type": "string", "maxLength": 256 },
+          "independent": { "type": "string", "maxLength": 256 },
+          "expected": { "type": "string", "maxLength": 256 },
+          "passed": { "const": true }
+        }
+      }
+    },
+    "evidenceHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "account": { "type": "string", "pattern": "^eip155:11155111:0x[a-f0-9]{40}$" },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "hash"],
+      "properties": {
+        "number": { "$ref": "#/$defs/decimal" },
+        "hash": { "$ref": "#/$defs/hash" }
+      }
+    }
+  }
+}

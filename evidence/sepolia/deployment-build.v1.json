@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "PUBLIC_TESTNET_DEMO_V1",
+  "status": "PREPARED_NOT_DEPLOYED",
+  "chainId": "eip155:11155111",
+  "compiler": {
+    "solc": "0.8.30",
+    "optimizer": true,
+    "optimizerRuns": 200,
+    "evmVersion": "prague",
+    "bytecodeHash": "none",
+    "cborMetadata": false
+  },
+  "sources": [
+    {
+      "path": "contracts/src/LocalToken.sol",
+      "sha256": "b965280d67a8516ac92743c537497ea65f7b3812fd028e375647ba3f18607e86"
+    },
+    {
+      "path": "contracts/src/LendingVault.sol",
+      "sha256": "5a52d51c68c22331c1879deb96efd45aeaba21e2ac80d87df0356807e90a277e"
+    },
+    {
+      "path": "contracts/src/PositionToken.sol",
+      "sha256": "091a0fc05a8f53066354357a029186eb4bf45205be1159e8f7e48a21864ce189"
+    },
+    {
+      "path": "contracts/script/DeploySepolia.s.sol",
+      "sha256": "09354626853aef058c9f757dbbb98905d24bcee881851db3ebc7383937e5222a"
+    }
+  ],
+  "contracts": [
+    {
+      "name": "LocalToken",
+      "artifactPath": "contracts/out/LocalToken.sol/LocalToken.json",
+      "creationBytecodeKeccak256": "0x3bd117d68ca4aab826b7f5dc3cf6b56022aaffca0c40f4b5272f42b62bae5f60",
+      "runtimeTemplateBytecodeKeccak256": "0xe92dffda25f57de9a90d9b456831b7421105ba3ef08468df1c2544a3b6fd9bbc"
+    },
+    {
+      "name": "LendingVault",
+      "artifactPath": "contracts/out/LendingVault.sol/LendingVault.json",
+      "creationBytecodeKeccak256": "0x77a0c59fd2a3a12b98f35c56af66a970a540e9698f1a03e9d9a778330fac4888",
+      "runtimeTemplateBytecodeKeccak256": "0x10ab5308dea28aa8d4723ba920eb7236719796bdf35df78c242210bc2bdfe1bb"
+    },
+    {
+      "name": "PositionToken",
+      "artifactPath": "contracts/out/PositionToken.sol/PositionToken.json",
+      "creationBytecodeKeccak256": "0xcddafb1bf723fd6e8af2c4ec4a4d5b1b01dbaca01701dcda5a4231f8fdfe4793",
+      "runtimeTemplateBytecodeKeccak256": "0xe63f218788c6caaf808c3c3bd4e553326ff466c6a608719dad577d7091507072"
+    }
+  ],
+  "transactionPlan": [
+    {
+      "sequence": 1,
+      "purpose": "DEPLOY_LOCAL_TOKEN",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 2,
+      "purpose": "DEPLOY_ALPHA_VAULT",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 3,
+      "purpose": "DEPLOY_BETA_VAULT",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 4,
+      "purpose": "DEPLOY_POSITION_TOKEN",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 5,
+      "purpose": "CONFIGURE_ALPHA_POSITION_TOKEN",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 6,
+      "purpose": "CONFIGURE_BETA_POSITION_TOKEN",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 7,
+      "purpose": "AUTHORIZE_ALPHA_VAULT",
+      "nativeValueWei": "0"
+    },
+    {
+      "sequence": 8,
+      "purpose": "AUTHORIZE_BETA_VAULT",
+      "nativeValueWei": "0"
+    }
+  ],
+  "localValidation": {
+    "environment": "ANVIL_LOCAL_SEPOLIA_ID_MIRROR",
+    "mirroredChainId": "11155111",
+    "transactionCount": 8,
+    "gasEstimateMultiplierBps": 11000,
+    "estimatedTotalGas": "1962812",
+    "deploymentMaxFeePerGasWei": "9000000000",
+    "estimatedWorstCaseGasCostWei": "17665308000000000"
+  },
+  "buildEvidenceHash": "0xebf5f237ff734e5457d57571042d9a2473d31ec8da9408837d85f2507e485d99"
+}

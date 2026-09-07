@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-trace:1.0.0",
+  "title": "IntentMesh sanitized public-testnet execution trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "traceId",
+    "profileId",
+    "publicBoundary",
+    "aiExecutionDisclosure",
+    "records",
+    "terminalEventHash",
+    "complete",
+    "traceHash"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "traceId": { "const": "intentmesh-sepolia-public-run-v1" },
+    "profileId": { "const": "PUBLIC_TESTNET_DEMO_V1" },
+    "publicBoundary": { "const": "CONTROLLED_ADMITTED_INTENT_TO_FINALIZED_POSTCONDITIONS" },
+    "aiExecutionDisclosure": { "const": "NO_LIVE_MODEL_CALL_IN_PUBLIC_RUN" },
+    "records": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": { "$ref": "#/$defs/record" }
+    },
+    "terminalEventHash": { "$ref": "#/$defs/hash" },
+    "complete": { "const": true },
+    "traceHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "PUBLIC_SECURITY_BOUNDARY_BOUND",
+        "DEPLOYMENT_MANIFEST_BOUND",
+        "ADMITTED_INTENT_BOUND",
+        "EVIDENCE_BUNDLE_ASSEMBLED",
+        "CANDIDATE_PLAN_SET_CREATED",
+        "POLICY_DECISION_SET_CREATED",
+        "PLAN_SELECTED",
+        "SIMULATION_COMPLETED",
+        "HUMAN_APPROVAL_VERIFIED",
+        "ALLOWANCE_SIGNATURE_VERIFIED",
+        "ALLOWANCE_CONFIRMED",
+        "DEPOSIT_SIGNATURE_VERIFIED",
+        "DEPOSIT_CONFIRMED",
+        "FINALIZED_POSTCONDITIONS_VERIFIED"
+      ]
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "sequence",
+        "eventType",
+        "componentId",
+        "occurredAt",
+        "inputHashes",
+        "outputHash",
+        "classification",
+        "authority",
+        "decisionCode",
+        "previousEventHash",
+        "redactionSummary",
+        "eventHash"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "pattern": "^intentmesh-sepolia-public-run-v1:[1-9][0-9]*$"
+        },
+        "sequence": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+        "eventType": { "$ref": "#/$defs/eventType" },
+        "componentId": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" },
+        "occurredAt": { "type": "string", "format": "date-time" },
+        "inputHashes": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/hash" }
+        },
+        "outputHash": { "$ref": "#/$defs/hash" },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "STANDARD",
+            "STANDARD PROFILE / ADAPTER",
+            "PROJECT-SPECIFIC SCHEMA",
+            "IMPLEMENTATION DETAIL"
+          ]
+        },
+        "authority": {
+          "type": "string",
+          "enum": ["DETERMINISTIC", "HUMAN", "EXTERNAL_SIGNER", "CHAIN"]
+        },
+        "decisionCode": { "type": "string", "pattern": "^[A-Z0-9_]{1,96}$" },
+        "previousEventHash": { "$ref": "#/$defs/hash" },
+        "redactionSummary": { "const": "HASHES_ONLY_NO_SECRETS_OR_SIGNED_BYTES" },
+        "eventHash": { "$ref": "#/$defs/hash" }
+      }
+    }
+  }
+}

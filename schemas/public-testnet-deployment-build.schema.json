@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:intentmesh:schema:public-testnet-deployment-build:1.0.0",
+  "title": "IntentMesh public-testnet deployment build evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "status",
+    "chainId",
+    "compiler",
+    "sources",
+    "contracts",
+    "transactionPlan",
+    "localValidation",
+    "buildEvidenceHash"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+    "profileId": { "type": "string", "const": "PUBLIC_TESTNET_DEMO_V1" },
+    "status": { "type": "string", "const": "PREPARED_NOT_DEPLOYED" },
+    "chainId": { "type": "string", "const": "eip155:11155111" },
+    "compiler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solc",
+        "optimizer",
+        "optimizerRuns",
+        "evmVersion",
+        "bytecodeHash",
+        "cborMetadata"
+      ],
+      "properties": {
+        "solc": { "type": "string", "const": "0.8.30" },
+        "optimizer": { "type": "boolean", "const": true },
+        "optimizerRuns": { "type": "integer", "const": 200 },
+        "evmVersion": { "type": "string", "const": "prague" },
+        "bytecodeHash": { "type": "string", "const": "none" },
+        "cborMetadata": { "type": "boolean", "const": false }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/fileDigest" }
+    },
+    "contracts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "artifactPath",
+          "creationBytecodeKeccak256",
+          "runtimeTemplateBytecodeKeccak256"
+        ],
+        "properties": {
+          "name": { "type": "string", "enum": ["LocalToken", "LendingVault", "PositionToken"] },
+          "artifactPath": { "type": "string", "minLength": 1 },
+          "creationBytecodeKeccak256": { "$ref": "#/$defs/keccak256" },
+          "runtimeTemplateBytecodeKeccak256": { "$ref": "#/$defs/keccak256" }
+        }
+      }
+    },
+    "transactionPlan": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sequence", "purpose", "nativeValueWei"],
+        "properties": {
+          "sequence": { "type": "integer", "minimum": 1, "maximum": 8 },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_LOCAL_TOKEN",
+              "DEPLOY_ALPHA_VAULT",
+              "DEPLOY_BETA_VAULT",
+              "DEPLOY_POSITION_TOKEN",
+              "CONFIGURE_ALPHA_POSITION_TOKEN",
+              "CONFIGURE_BETA_POSITION_TOKEN",
+              "AUTHORIZE_ALPHA_VAULT",
+              "AUTHORIZE_BETA_VAULT"
+            ]
+          },
+          "nativeValueWei": { "type": "string", "const": "0" }
+        }
+      }
+    },
+    "localValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "environment",
+        "mirroredChainId",
+        "transactionCount",
+        "gasEstimateMultiplierBps",
+        "estimatedTotalGas",
+        "deploymentMaxFeePerGasWei",
+        "estimatedWorstCaseGasCostWei"
+      ],
+      "properties": {
+        "environment": { "type": "string", "const": "ANVIL_LOCAL_SEPOLIA_ID_MIRROR" },
+        "mirroredChainId": { "type": "string", "const": "11155111" },
+        "transactionCount": { "type": "integer", "const": 8 },
+        "gasEstimateMultiplierBps": { "type": "integer", "const": 11000 },
+        "estimatedTotalGas": { "type": "string", "const": "1962812" },
+        "deploymentMaxFeePerGasWei": { "type": "string", "const": "9000000000" },
+        "estimatedWorstCaseGasCostWei": { "type": "string", "const": "17665308000000000" }
+      }
+    },
+    "buildEvidenceHash": { "$ref": "#/$defs/keccak256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "keccak256": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+    "fileDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
